@@ -5,7 +5,8 @@ import { ChevronRight, Dumbbell } from 'lucide-react'
 
 interface Experience {
   id: string
-  experienced_at: string
+  started_at: string
+  ended_at: string | null
   fun_score: number | null
   review: string | null
   sports: { name: string; category: string | null }
@@ -63,7 +64,10 @@ export default function RecentExperiences({ experiences }: RecentExperiencesProp
                   <FunScoreEmoji score={exp.fun_score} />
                 </div>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  {format(parseISO(exp.experienced_at), 'M월 d일 (EEE)', { locale: ko })}
+                  {format(parseISO(exp.started_at), 'M월 d일 (EEE)', { locale: ko })}
+                  {exp.ended_at && exp.ended_at !== exp.started_at && (
+                    <span> ~ {format(parseISO(exp.ended_at), 'M월 d일 (EEE)', { locale: ko })}</span>
+                  )}
                 </p>
                 {exp.review && (
                   <p className="text-xs text-slate-500 mt-1 truncate">{exp.review}</p>

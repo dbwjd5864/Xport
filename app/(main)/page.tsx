@@ -31,9 +31,9 @@ export default async function HomePage() {
   // 최근 기록 3개
   const { data: recentExperiences } = await supabase
     .from('experiences')
-    .select('id, experienced_at, fun_score, review, sports(name, category)')
+    .select('id, started_at, ended_at, fun_score, review, sports(name, category)')
     .eq('user_id', user.id)
-    .order('experienced_at', { ascending: false })
+    .order('started_at', { ascending: false })
     .limit(3)
 
   // 다음 일정
